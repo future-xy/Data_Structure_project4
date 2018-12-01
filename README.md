@@ -2,6 +2,9 @@
 ###  1.Try to use C++11 or newer standards
 ###  2.Please name your variables meaningfully
 ###  3.Write some comments   
+###  4.Do not use "using namespace std;" anywhere   
+
+
 
     
 

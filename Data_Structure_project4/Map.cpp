@@ -12,9 +12,3 @@ Map::Map()
 {
 	//Build the Map from filename;
 }
-
-
-Map::~Map()
-{
-	//Save the Adjacency list to filename;
-}

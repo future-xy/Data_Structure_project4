@@ -32,12 +32,14 @@ struct Node
 class Map
 {
 public:
-	//These two functions are prepared for Weixing Feng
+	//This function is prepared for Weixing Feng
 	Map();
-	~Map();
+	~Map() = default;
 
-
-	std::vector<Coordinate > shortest_Navigation(Coordinate from, Coordinate to);
+	//return the shortest path by driving
+	std::vector<Coordinate> shortest_Navigation_Car(Coordinate from, Coordinate to) const;
+	//return the shortest path by walking
+	std::vector<Coordinate> shortest_Navigation_Walk(Coordinate from, Coordinate to) const;
 
 	std::vector<Node> Place() const;
 	std::vector<Node> WC() const;
@@ -45,7 +47,7 @@ public:
 	std::vector<Node> Smarket() const;
 	std::vector<Node> Restaurant() const;
 
-	std::string Info(Coordinate);
+	std::string Info(Coordinate) const;
 
 private:
 	std::map<Coordinate, Node> adj_Matrix;
