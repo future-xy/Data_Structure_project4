@@ -41,11 +41,11 @@ public:
 	//return the shortest path by walking
 	std::vector<Coordinate> shortest_Navigation_Walk(Coordinate from, Coordinate to) const;
 
-	std::vector<Node> Place() const;
-	std::vector<Node> WC() const;
-	std::vector<Node> Parking_lot() const;
-	std::vector<Node> Smarket() const;
-	std::vector<Node> Restaurant() const;
+	std::vector<Node> getPlace() const;
+	std::vector<Node> getWC() const;
+	std::vector<Node> getParking_lot() const;
+	std::vector<Node> getSmarket() const;
+	std::vector<Node> getRestaurant() const;
 
 	std::string Info(Coordinate) const;
 
