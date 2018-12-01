@@ -14,24 +14,33 @@ Data_Structure_project4::Data_Structure_project4(QWidget *parent)
 
 	this->image = new QImage();
 	QString filename = ".\\images\\map.png";
+	_map = new Map;
 
 	if (image->load(filename))
 	{
-		QGraphicsScene *scene = new QGraphicsScene;
+		scene = new QGraphicsScene;
 		scene->addPixmap(QPixmap::fromImage(*image));
 		ui.Background->setScene(scene);
 		ui.Background->resize(1280, 720);
 		ui.Background->show();
 	}
+
+	//show place
 }
 
 Data_Structure_project4::~Data_Structure_project4()
 {
 	delete image;
 	delete _map;
+	delete scene;
 }
 
-void Data_Structure_project4::on_Navigation_clicked()
+void Data_Structure_project4::on_Driving_Navigation_clicked()
+{
+
+}
+
+void Data_Structure_project4::on_Walking_Navigation_clicked()
 {
 
 }

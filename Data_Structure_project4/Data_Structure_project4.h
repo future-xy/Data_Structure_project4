@@ -23,11 +23,13 @@ public:
 
 private:
 	Ui::Data_Structure_project4Class ui;
+	QGraphicsScene *scene;
 	QImage *image;
 	Map *_map;
 
 private slots:
-	void on_Navigation_clicked();
+	void on_Driving_Navigation_clicked();
+	void on_Walking_Navigation_clicked();
 	void on_Quit_clicked();
 	
 	void on_Parking_lot_clicked();

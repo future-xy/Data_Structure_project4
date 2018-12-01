@@ -23,10 +23,6 @@ struct Node
 	std::set<std::tuple<Coordinate,int> > neighbors;
 	std::string name;
 	std::string info;
-
-	//wait to be implemented
-	Node() = default;
-	void Init(Coordinate coordinate, Type_node type, std::set<std::tuple<Coordinate,int> >, std::string info);	
 };
 
 class Map

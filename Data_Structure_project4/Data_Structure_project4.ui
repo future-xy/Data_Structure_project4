@@ -54,7 +54,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>140</y>
+      <y>170</y>
       <width>114</width>
       <height>165</height>
      </rect>
@@ -90,20 +90,27 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>20</y>
       <width>114</width>
-      <height>79</height>
+      <height>122</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="Navigation">
+      <widget class="QPushButton" name="Walking_Navigation">
        <property name="text">
-        <string>开始导航</string>
+        <string>步行路线</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Driving_Navigation">
+       <property name="text">
+        <string>驾驶路线</string>
        </property>
       </widget>
      </item>
