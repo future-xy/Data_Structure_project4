@@ -8,6 +8,7 @@
 #include <set>
 #include <utility>
 #include <string>
+#include <tuple>
 
 enum Type_node { Place, Point, Restaurant, WC, Parking_lot, Smarket };
 
@@ -17,13 +18,15 @@ struct Node
 {
 	Coordinate coordinate;
 	Type_node type;
-	std::set<Coordinate> neighbors;
+	//-1 == footwalk
+	// 1 == roadway
+	std::set<std::tuple<Coordinate,int> > neighbors;
 	std::string name;
 	std::string info;
 
 	//wait to be implemented
 	Node() = default;
-	void Init(Coordinate coordinate, Type_node type, std::set<Coordinate>, std::string info);	
+	void Init(Coordinate coordinate, Type_node type, std::set<std::tuple<Coordinate,int> >, std::string info);	
 };
 
 class Map
