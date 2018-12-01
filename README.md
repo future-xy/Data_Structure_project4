@@ -1,3 +1,9 @@
+##  Basic Requirements
+###  1.Try to use C++11 or newer standards
+###  2.Please name your variables meaningfully
+###  3.Write some comments   
+
+    
 
 ##  Front-End  
 
@@ -11,9 +17,9 @@
 
 >#####  `enum Type_node{Place, Point, Restaurant, WC, Parking_lot, Smarket}`  
 
-####  --Adjacency list, storing an adjacent Node as "value", whose coordinate is "key"  
+####  --Adjacency list, storing the coordinate as "value"  
 
->#####  `std::map<Pair, Node>`  
+>#####  `std::set<std::pair<int,int> >`  
 
 ####  --Introduction of Place, others are ""  
 >#####  `string Info;`  

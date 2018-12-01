@@ -11,16 +11,19 @@
 
 enum Type_node { Place, Point, Restaurant, WC, Parking_lot, Smarket };
 
+typedef std::pair<int, int> Coordinate;
+
 struct Node
 {
-	int x, y;
+	Coordinate coordinate;
 	Type_node type;
-	std::set<std::pair<int, int> > neighbors;
+	std::set<Coordinate> neighbors;
 	std::string name;
 	std::string info;
 
 	//wait to be implemented
-	void Init(int x, int y, Type_node type, std::set<std::pair<int, int> >, std::string info);	
+	Node() = default;
+	void Init(Coordinate coordinate, Type_node type, std::set<Coordinate>, std::string info);	
 };
 
 class Map
@@ -30,19 +33,19 @@ public:
 	Map();
 	~Map();
 
-	
-	std::vector<std::pair<int, int> > shortest_Navigation(std::pair<int, int> from, std::pair<int, int> to);
-	
+
+	std::vector<Coordinate > shortest_Navigation(Coordinate from, Coordinate to);
+
 	std::vector<Node> Place() const;
 	std::vector<Node> WC() const;
 	std::vector<Node> Parking_lot() const;
 	std::vector<Node> Smarket() const;
 	std::vector<Node> Restaurant() const;
 
-	std::string Info(std::pair<int, int>);
-	
+	std::string Info(Coordinate);
+
 private:
-	std::map<std::pair<int, int>, Node> adj_Matrix;
+	std::map<Coordinate, Node> adj_Matrix;
 };
 
 #endif // !MAP_H
