@@ -171,7 +171,8 @@ std::vector<Coordinate> Map::shortest_particular(
 }
 std::vector<Coordinate> Map::shortest_Navigation_Car(
 	const vector<Coordinate> &KeySite) {
-	int n= Label_Common();int m= Label_Key(KeySite);BuildGraph(n, -1);
+	int n= Label_Common();
+	BuildGraph(n, -1);
     int tunnal = -1, to = Index_Common[KeySite.back()];
 	BuildGraph(n,-1);
 	for (int i=0; i<n; ++i)if (Car_Access[i]){
