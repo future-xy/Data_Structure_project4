@@ -56,7 +56,7 @@ public:
         const std::vector<Coordinate> &KeySite);
     std::vector<Coordinate> shortest_Navigation_Walk(
         	const std::vector<Coordinate> &KeySite);
-// private:
+private:
 	std::map<Coordinate, Node> adj_Matrix;
     void BuildGraph(int n,int op);
     int Label_Common();
