@@ -13,6 +13,8 @@
 #include "ui_Data_Structure_project4.h"
 #include "Map.h"
 
+enum Status { Empty, Driving, Walking };
+
 class Data_Structure_project4 : public QMainWindow
 {
 	Q_OBJECT
@@ -26,8 +28,16 @@ private:
 	QGraphicsScene *scene;
 	QImage *image;
 	Map *_map;
+	std::vector<QGraphicsPixmapItem* > points;
+	std::vector<Coordinate> path_to_show;
+	std::vector<QPointF> path_to_save;
+	Status theStatus;
 
 private slots:
+	void on_mouseMovePoint(QPoint point);
+	void on_mouseClicked(QPoint point);
+
+	void on_Start_clicked();
 	void on_Driving_Navigation_clicked();
 	void on_Walking_Navigation_clicked();
 	void on_Quit_clicked();
