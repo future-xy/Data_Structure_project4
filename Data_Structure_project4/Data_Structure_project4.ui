@@ -13,8 +13,12 @@
   <property name="windowTitle">
    <string>Data_Structure_project4</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QTextBrowser { backfround-color: rgb(255,132,139,0);
+border-radius: 3px; color: rgb(0,0,0);}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGraphicsView" name="Background">
+   <widget class="MyGraphicsView" name="Background">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -28,8 +32,8 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>440</y>
-      <width>112</width>
+      <y>540</y>
+      <width>119</width>
       <height>34</height>
      </rect>
     </property>
@@ -41,8 +45,8 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>360</y>
-      <width>112</width>
+      <y>450</y>
+      <width>119</width>
       <height>34</height>
      </rect>
     </property>
@@ -50,78 +54,173 @@
      <string>图像识别</string>
     </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QPushButton" name="Quit">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>170</y>
-      <width>114</width>
-      <height>165</height>
+      <y>490</y>
+      <width>119</width>
+      <height>34</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QPushButton" name="Parking_lot">
-       <property name="text">
-        <string>停车场</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Smarket">
-       <property name="text">
-        <string>超市</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Restaurant">
-       <property name="text">
-        <string>餐厅</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="WC">
-       <property name="text">
-        <string>卫生间</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="text">
+     <string>取消</string>
+    </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>114</width>
-      <height>122</height>
+      <x>740</x>
+      <y>30</y>
+      <width>256</width>
+      <height>192</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="Walking_Navigation">
-       <property name="text">
-        <string>步行路线</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Driving_Navigation">
-       <property name="text">
-        <string>驾驶路线</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Quit">
-       <property name="text">
-        <string>退出导航</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei</family>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(237, 245, 255, 150);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Start">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>22</y>
+      <width>112</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>开始规划</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Driving_Navigation">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>59</y>
+      <width>57</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>驾车</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Walking_Navigation">
+    <property name="geometry">
+     <rect>
+      <x>77</x>
+      <y>59</y>
+      <width>57</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>步行</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Parking_lot">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>271</y>
+      <width>112</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>停车场</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Restaurant">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>342</y>
+      <width>112</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>餐厅</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Smarket">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>307</y>
+      <width>112</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>超市</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="WC">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>378</y>
+      <width>112</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>卫生间</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="recommended3">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>184</y>
+      <width>112</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>推荐路线3</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="recommended">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>111</y>
+      <width>112</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>推荐路线1</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="recommend2">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>147</y>
+      <width>112</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>推荐路线2</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -145,6 +244,13 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>mygraphicsview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="Data_Structure_project4.qrc"/>
  </resources>

@@ -44,9 +44,15 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MyGraphicsView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Data_Structure_project4.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="MyGraphicsView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

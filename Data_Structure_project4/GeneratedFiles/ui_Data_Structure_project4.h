@@ -13,15 +13,15 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "mygraphicsview.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -29,19 +29,21 @@ class Ui_Data_Structure_project4Class
 {
 public:
     QWidget *centralWidget;
-    QGraphicsView *Background;
+    MyGraphicsView *Background;
     QPushButton *Translate;
     QPushButton *Test_Function;
-    QWidget *layoutWidget;
-    QVBoxLayout *verticalLayout_2;
-    QPushButton *Parking_lot;
-    QPushButton *Smarket;
-    QPushButton *Restaurant;
-    QPushButton *WC;
-    QWidget *layoutWidget1;
-    QVBoxLayout *verticalLayout;
-    QPushButton *Navigation;
     QPushButton *Quit;
+    QTextBrowser *textBrowser;
+    QPushButton *Start;
+    QPushButton *Driving_Navigation;
+    QPushButton *Walking_Navigation;
+    QPushButton *Parking_lot;
+    QPushButton *Restaurant;
+    QPushButton *Smarket;
+    QPushButton *WC;
+    QPushButton *recommended3;
+    QPushButton *recommended;
+    QPushButton *recommend2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -51,63 +53,62 @@ public:
         if (Data_Structure_project4Class->objectName().isEmpty())
             Data_Structure_project4Class->setObjectName(QStringLiteral("Data_Structure_project4Class"));
         Data_Structure_project4Class->resize(1280, 720);
+        Data_Structure_project4Class->setStyleSheet(QLatin1String("QTextBrowser { backfround-color: rgb(255,132,139,0);\n"
+"border-radius: 3px; color: rgb(0,0,0);}"));
         centralWidget = new QWidget(Data_Structure_project4Class);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        Background = new QGraphicsView(centralWidget);
+        Background = new MyGraphicsView(centralWidget);
         Background->setObjectName(QStringLiteral("Background"));
         Background->setGeometry(QRect(0, 0, 1280, 720));
         Translate = new QPushButton(centralWidget);
         Translate->setObjectName(QStringLiteral("Translate"));
-        Translate->setGeometry(QRect(20, 440, 112, 34));
+        Translate->setGeometry(QRect(20, 540, 119, 34));
         Test_Function = new QPushButton(centralWidget);
         Test_Function->setObjectName(QStringLiteral("Test_Function"));
-        Test_Function->setGeometry(QRect(20, 360, 112, 34));
-        layoutWidget = new QWidget(centralWidget);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 140, 114, 165));
-        verticalLayout_2 = new QVBoxLayout(layoutWidget);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        Parking_lot = new QPushButton(layoutWidget);
-        Parking_lot->setObjectName(QStringLiteral("Parking_lot"));
-
-        verticalLayout_2->addWidget(Parking_lot);
-
-        Smarket = new QPushButton(layoutWidget);
-        Smarket->setObjectName(QStringLiteral("Smarket"));
-
-        verticalLayout_2->addWidget(Smarket);
-
-        Restaurant = new QPushButton(layoutWidget);
-        Restaurant->setObjectName(QStringLiteral("Restaurant"));
-
-        verticalLayout_2->addWidget(Restaurant);
-
-        WC = new QPushButton(layoutWidget);
-        WC->setObjectName(QStringLiteral("WC"));
-
-        verticalLayout_2->addWidget(WC);
-
-        layoutWidget1 = new QWidget(centralWidget);
-        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(20, 20, 114, 79));
-        verticalLayout = new QVBoxLayout(layoutWidget1);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        Navigation = new QPushButton(layoutWidget1);
-        Navigation->setObjectName(QStringLiteral("Navigation"));
-
-        verticalLayout->addWidget(Navigation);
-
-        Quit = new QPushButton(layoutWidget1);
+        Test_Function->setGeometry(QRect(20, 450, 119, 34));
+        Quit = new QPushButton(centralWidget);
         Quit->setObjectName(QStringLiteral("Quit"));
-
-        verticalLayout->addWidget(Quit);
-
+        Quit->setGeometry(QRect(20, 490, 119, 34));
+        textBrowser = new QTextBrowser(centralWidget);
+        textBrowser->setObjectName(QStringLiteral("textBrowser"));
+        textBrowser->setGeometry(QRect(740, 30, 256, 192));
+        QFont font;
+        font.setFamily(QStringLiteral("Microsoft YaHei"));
+        font.setPointSize(15);
+        textBrowser->setFont(font);
+        textBrowser->setStyleSheet(QStringLiteral("background-color: rgba(237, 245, 255, 150);"));
+        textBrowser->setFrameShadow(QFrame::Raised);
+        textBrowser->setLineWidth(0);
+        Start = new QPushButton(centralWidget);
+        Start->setObjectName(QStringLiteral("Start"));
+        Start->setGeometry(QRect(22, 22, 112, 30));
+        Driving_Navigation = new QPushButton(centralWidget);
+        Driving_Navigation->setObjectName(QStringLiteral("Driving_Navigation"));
+        Driving_Navigation->setGeometry(QRect(22, 59, 57, 34));
+        Walking_Navigation = new QPushButton(centralWidget);
+        Walking_Navigation->setObjectName(QStringLiteral("Walking_Navigation"));
+        Walking_Navigation->setGeometry(QRect(77, 59, 57, 34));
+        Parking_lot = new QPushButton(centralWidget);
+        Parking_lot->setObjectName(QStringLiteral("Parking_lot"));
+        Parking_lot->setGeometry(QRect(21, 271, 112, 29));
+        Restaurant = new QPushButton(centralWidget);
+        Restaurant->setObjectName(QStringLiteral("Restaurant"));
+        Restaurant->setGeometry(QRect(21, 342, 112, 29));
+        Smarket = new QPushButton(centralWidget);
+        Smarket->setObjectName(QStringLiteral("Smarket"));
+        Smarket->setGeometry(QRect(21, 307, 112, 28));
+        WC = new QPushButton(centralWidget);
+        WC->setObjectName(QStringLiteral("WC"));
+        WC->setGeometry(QRect(21, 378, 112, 28));
+        recommended3 = new QPushButton(centralWidget);
+        recommended3->setObjectName(QStringLiteral("recommended3"));
+        recommended3->setGeometry(QRect(21, 184, 112, 29));
+        recommended = new QPushButton(centralWidget);
+        recommended->setObjectName(QStringLiteral("recommended"));
+        recommended->setGeometry(QRect(21, 111, 112, 29));
+        recommend2 = new QPushButton(centralWidget);
+        recommend2->setObjectName(QStringLiteral("recommend2"));
+        recommend2->setGeometry(QRect(21, 147, 112, 30));
         Data_Structure_project4Class->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Data_Structure_project4Class);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -130,12 +131,17 @@ public:
         Data_Structure_project4Class->setWindowTitle(QApplication::translate("Data_Structure_project4Class", "Data_Structure_project4", Q_NULLPTR));
         Translate->setText(QApplication::translate("Data_Structure_project4Class", "English", Q_NULLPTR));
         Test_Function->setText(QApplication::translate("Data_Structure_project4Class", "\345\233\276\345\203\217\350\257\206\345\210\253", Q_NULLPTR));
+        Quit->setText(QApplication::translate("Data_Structure_project4Class", "\345\217\226\346\266\210", Q_NULLPTR));
+        Start->setText(QApplication::translate("Data_Structure_project4Class", "\345\274\200\345\247\213\350\247\204\345\210\222", Q_NULLPTR));
+        Driving_Navigation->setText(QApplication::translate("Data_Structure_project4Class", "\351\251\276\350\275\246", Q_NULLPTR));
+        Walking_Navigation->setText(QApplication::translate("Data_Structure_project4Class", "\346\255\245\350\241\214", Q_NULLPTR));
         Parking_lot->setText(QApplication::translate("Data_Structure_project4Class", "\345\201\234\350\275\246\345\234\272", Q_NULLPTR));
-        Smarket->setText(QApplication::translate("Data_Structure_project4Class", "\350\266\205\345\270\202", Q_NULLPTR));
         Restaurant->setText(QApplication::translate("Data_Structure_project4Class", "\351\244\220\345\216\205", Q_NULLPTR));
+        Smarket->setText(QApplication::translate("Data_Structure_project4Class", "\350\266\205\345\270\202", Q_NULLPTR));
         WC->setText(QApplication::translate("Data_Structure_project4Class", "\345\215\253\347\224\237\351\227\264", Q_NULLPTR));
-        Navigation->setText(QApplication::translate("Data_Structure_project4Class", "\345\274\200\345\247\213\345\257\274\350\210\252", Q_NULLPTR));
-        Quit->setText(QApplication::translate("Data_Structure_project4Class", "\351\200\200\345\207\272\345\257\274\350\210\252", Q_NULLPTR));
+        recommended3->setText(QApplication::translate("Data_Structure_project4Class", "\346\216\250\350\215\220\350\267\257\347\272\2773", Q_NULLPTR));
+        recommended->setText(QApplication::translate("Data_Structure_project4Class", "\346\216\250\350\215\220\350\267\257\347\272\2771", Q_NULLPTR));
+        recommend2->setText(QApplication::translate("Data_Structure_project4Class", "\346\216\250\350\215\220\350\267\257\347\272\2772", Q_NULLPTR));
     } // retranslateUi
 
 };

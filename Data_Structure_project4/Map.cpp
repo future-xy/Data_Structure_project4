@@ -2,10 +2,15 @@
 #include <algorithm>
 #include <cmath>
 #include <assert.h>
-//#define che
-#define debug(...) fprintf(stderr,__VA_ARGS__)
-using std::string;
+#include<fstream>
+#include<sstream>
+
 using std::map;
+using std::ios;
+using std::ifstream;
+using std::string;
+using std::stringstream;
+using std::tuple;
 using std::set;
 using std::pair;
 using std::vector;
@@ -25,7 +30,65 @@ namespace _Fc_Temp_Array_{
     }
 } using namespace _Fc_Temp_Array_;
 
-Map::Map(){//Build the Map from filename;
+Map::Map() {//Build the Map from filename;
+	ifstream inFile(filename, ios::in);
+	string information;
+	getline(inFile, information);
+	while (getline(inFile, information)) {
+		Node node;
+		string temp;
+		stringstream ss(information);
+		getline(ss, temp, ',');
+		const char *cstr = temp.c_str();
+		int first, second;
+		sscanf(cstr, "%d %d", &first, &second);
+		Coordinate point(first, second);
+		node.coordinate = point;
+
+		getline(ss, temp, ',');
+		node.name = temp;
+
+		getline(ss, temp, ',');
+		//int choice;
+		if (temp == "Place") {
+			//choice = 0;
+			node.type = Place;
+		}
+		else if (temp == "Restaurant") {
+			//choice = 1;
+			node.type = Restaurant;
+		}
+		else if (temp == "WC") {
+			//choice = 2;
+			node.type = WC;
+		}
+		else if (temp == "Parking_lot") {
+			//choice = 3;
+			node.type = Parking_lot;
+		}
+		else if (temp == "Smarket") {
+			//choice = 4;
+			node.type = Smarket;
+		}
+		else {
+			//choice = 5;
+			node.type = Point;
+		}
+
+		getline(ss, temp, ',');
+		node.info = temp;
+
+		while (getline(ss, temp, ',')) {
+			const char *_cstr = temp.c_str();
+			int a, b, c;
+			sscanf(_cstr, "%d %d %d", &a, &b, &c);
+			Coordinate p(a, b);
+			tuple <Coordinate, int> pt(p, c);
+			node.neighbors.insert(pt);
+		}
+
+		adj_Matrix[point] = node;
+	}
 }
 std::vector<Node> Map::getPlace()const{
 	std::vector<Node> tot;
