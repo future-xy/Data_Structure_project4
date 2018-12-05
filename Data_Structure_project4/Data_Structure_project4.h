@@ -13,7 +13,7 @@
 #include "ui_Data_Structure_project4.h"
 #include "Map.h"
 
-enum Status { Empty, Driving, Walking };
+enum Status { Empty, Navigation };
 
 class Data_Structure_project4 : public QMainWindow
 {
@@ -28,6 +28,7 @@ private:
 	QGraphicsScene *scene;
 	QImage *image;
 	Map *_map;
+	QPainterPath *mypath;
 	std::vector<QGraphicsPixmapItem* > points;
 	std::vector<Coordinate> path_to_show;
 	std::vector<QPointF> path_to_save;

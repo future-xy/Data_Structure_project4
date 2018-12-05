@@ -2,6 +2,9 @@
 
 #include <qtranslator.h>
 #include <qsettings.h>
+#include <cstdio>
+#include <qdebug.h>
+#include <qgraphicsitem.h>
 
 using std::make_pair;
 
@@ -17,7 +20,7 @@ Data_Structure_project4::Data_Structure_project4(QWidget *parent)
 
 	this->image = new QImage();
 	QString filename = "map.png";
-	//_map = new Map;
+	_map = new Map;
 	theStatus = Empty;
 
 	if (image->load(filename))
@@ -28,7 +31,7 @@ Data_Structure_project4::Data_Structure_project4(QWidget *parent)
 		ui.Background->resize(1280, 720);
 		ui.Background->show();
 	}
-
+	mypath = nullptr;
 	ui.Background->setMouseTracking(true);
 	ui.textBrowser->setVisible(false);
 	
@@ -59,10 +62,10 @@ void Data_Structure_project4::on_mouseMovePoint(QPoint point)
 void Data_Structure_project4::on_mouseClicked(QPoint point)
 {//鼠标单击事件
 	QPointF pointScene = ui.Background->mapToScene(point);
-	Coordinate cor = _map->match(make_pair(pointScene.x(), pointScene.y());
+	Coordinate cor = _map->MatchSite(make_pair(pointScene.x(), pointScene.y()));
 	if (cor.first != -1 && cor.second != -1)
 	{
-		if (theStatus != Empty)
+		if (theStatus == Navigation)
 		{
 			path_to_save.push_back(pointScene);
 		}
@@ -72,28 +75,36 @@ void Data_Structure_project4::on_mouseClicked(QPoint point)
 			ui.textBrowser->setText(info);
 		}
 	}
-	/*int x = pointScene.x();
-	int y = pointScene.y();
-	if (arr_point.empty())
-	{
-		ui.textBrowser->setVisible(true);
-		ui.textBrowser->setText(QString::asprintf("Scene : %.0f,%.0f", pointScene.x(), pointScene.y()));
-	}
-	arr_point.push_back(make_pair(x, y));
-	QPointF pointScene = ui.Background->mapToScene(point); //转换到Scene坐标
-	ui.textBrowser->setText(QString::asprintf("Scene ：%.0f,%.0f", pointScene.x(), pointScene.y()));
-	ui.textBrowser->setVisible(true);
-	*/
 }
 
 void Data_Structure_project4::on_Start_clicked()
 {
-	theStatus = 
+	theStatus = Navigation;
 }
 
 void Data_Structure_project4::on_Driving_Navigation_clicked()
 {
+	ui.textBrowser->setVisible(true);
+	vector<Coordinate> temp_path;
+	for (auto it : path_to_save)
+	{
+		temp_path.push_back(make_pair(it.x(), it.y()));
+	}
+	if (temp_path.size() < 2)
+		return;
+	path_to_show.clear();
+	path_to_show = _map->shortest_Navigation_Car(temp_path);
+	if (mypath != nullptr)
+		delete mypath;
+	mypath = new QPainterPath;
+	mypath->moveTo(path_to_show[0].first, path_to_show[0].second);
 
+	ui.textBrowser->setText(QString::number(path_to_show.size()) + QString::number(temp_path.size()));
+	for (int i = 1; i < path_to_show.size(); ++i)
+	{
+		mypath->lineTo(path_to_show[i].first, path_to_show[i].second);
+	}
+	scene->addPath(*mypath);
 }
 
 void Data_Structure_project4::on_Walking_Navigation_clicked()
