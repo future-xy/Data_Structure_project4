@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1544008145 source:/home/jijorbq/Documents/vmatrix/dscourse/Data_Structure_project4/Data_Structure_project4/Map.cpp
+	"Map.h"
+	<algorithm>
+	<cmath>
+	<assert.h>
+
+1544008545 /home/jijorbq/Documents/vmatrix/dscourse/Data_Structure_project4/Data_Structure_project4/Map.h
+	<map>
+	<vector>
+	<set>
+	<utility>
+	<string>
+	<tuple>
+
+1544008812 source:/home/jijorbq/Documents/vmatrix/dscourse/Data_Structure_project4/Data_Structure_project4/test.cpp
+	<bits/stdc++.h>
+	<tuple>
+	"Map.h"
+
+1543936325 /home/jijorbq/Documents/vmatrix/dscourse/Data_Structure_project4/Data_Structure_project4/Map.cpp
+	"Map.h"
+	<algorithm>
+	<cmath>
+	<assert.h>
+
