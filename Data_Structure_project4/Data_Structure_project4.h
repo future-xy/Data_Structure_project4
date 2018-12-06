@@ -28,20 +28,26 @@ private:
 	QGraphicsScene *scene;
 	QImage *image;
 	Map *_map;
-	QPainterPath *mypath;
+	std::vector<QGraphicsLineItem *> mypath;
+	QPixmap the_parking_lot, the_WC, the_restaurant, the_smarket;
 	std::vector<QGraphicsPixmapItem* > points;
+	std::vector<QGraphicsEllipseItem*> places;
 	std::vector<Coordinate> path_to_show;
 	std::vector<QPointF> path_to_save;
 	Status theStatus;
 
 private slots:
-	void on_mouseMovePoint(QPoint point);
+//	void on_mouseMovePoint(QPoint point);
 	void on_mouseClicked(QPoint point);
 
 	void on_Start_clicked();
 	void on_Driving_Navigation_clicked();
 	void on_Walking_Navigation_clicked();
 	void on_Quit_clicked();
+
+	void on_recommended_clicked();
+	void on_recommended2_clicked();
+	void on_recommended3_clicked();
 	
 	void on_Parking_lot_clicked();
 	void on_Smarket_clicked();

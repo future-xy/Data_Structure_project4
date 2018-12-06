@@ -41,7 +41,7 @@ Map::Map() {//Build the Map from filename;
 		getline(ss, temp, ',');
 		const char *cstr = temp.c_str();
 		int first, second;
-		sscanf(cstr, "%d %d", &first, &second);
+		sscanf_s(cstr, "%d %d", &first, &second);
 		Coordinate point(first, second);
 		node.coordinate = point;
 
@@ -81,7 +81,7 @@ Map::Map() {//Build the Map from filename;
 		while (getline(ss, temp, ',')) {
 			const char *_cstr = temp.c_str();
 			int a, b, c;
-			sscanf(_cstr, "%d %d %d", &a, &b, &c);
+			sscanf_s(_cstr, "%d %d %d", &a, &b, &c);
 			Coordinate p(a, b);
 			tuple <Coordinate, int> pt(p, c);
 			node.neighbors.insert(pt);
