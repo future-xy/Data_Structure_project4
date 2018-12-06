@@ -119,8 +119,6 @@ void Data_Structure_project4::on_mouseClicked(QPoint point)
 	QPointF pointScene = ui.Background->mapToScene(point);
 	Coordinate cor = _map->MatchSite(make_pair(pointScene.x(), pointScene.y()));
 	QPointF cur_cor(cor.first, cor.second);
-	ui.textBrowser->setVisible(true);
-	ui.textBrowser->setText(QString::number(cur_cor.x()) + " " + QString::number(cur_cor.y()));
 
 	if (cor.first != -1 && cor.second != -1)
 	{
@@ -283,7 +281,7 @@ void Data_Structure_project4::on_Parking_lot_clicked()
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_parking_lot);
 		QGraphicsTextItem *temp_text = new QGraphicsTextItem(QString::fromStdString(item.name));
 		temp_item->setPos(item.coordinate.first, item.coordinate.second);
-		temp_text->setPos(item.coordinate.first + 10, item.coordinate.second - 15);
+		temp_text->setPos(item.coordinate.first - 30, item.coordinate.second + 25);
 		scene->addItem(temp_item);
 		scene->addItem(temp_text);
 		points.push_back(temp_item);
@@ -307,7 +305,7 @@ void Data_Structure_project4::on_Restaurant_clicked()
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_restaurant);
 		QGraphicsTextItem *temp_text = new QGraphicsTextItem(QString::fromStdString(item.name));
 		temp_item->setPos(item.coordinate.first, item.coordinate.second);
-		temp_text->setPos(item.coordinate.first + 10, item.coordinate.second - 15);
+		temp_text->setPos(item.coordinate.first - 20, item.coordinate.second + 25);
 		scene->addItem(temp_item);
 		scene->addItem(temp_text);
 		points.push_back(temp_item);
@@ -331,7 +329,7 @@ void Data_Structure_project4::on_Smarket_clicked()
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_smarket);
 		QGraphicsTextItem *temp_text = new QGraphicsTextItem(QString::fromStdString(item.name));
 		temp_item->setPos(item.coordinate.first, item.coordinate.second);
-		temp_text->setPos(item.coordinate.first + 10, item.coordinate.second - 15);
+		temp_text->setPos(item.coordinate.first - 20, item.coordinate.second + 25);
 		scene->addItem(temp_item);
 		scene->addItem(temp_text);
 		points.push_back(temp_item);
