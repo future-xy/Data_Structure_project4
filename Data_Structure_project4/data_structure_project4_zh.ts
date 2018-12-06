@@ -6,7 +6,7 @@
     <message>
         <location filename="Data_Structure_project4.ui" line="14"/>
         <source>Data_Structure_project4</source>
-        <translation type="unfinished">数据结构项目四</translation>
+        <translation>中山大学地图导航</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="41"/>
@@ -51,17 +51,17 @@
     <message>
         <location filename="Data_Structure_project4.ui" line="196"/>
         <source>推荐路线3</source>
-        <translation type="unfinished"></translation>
+        <translation>地道探险</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="209"/>
         <source>推荐路线1</source>
-        <translation type="unfinished"></translation>
+        <translation>中轴线之旅</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="222"/>
         <source>推荐路线2</source>
-        <translation type="unfinished"></translation>
+        <translation>宿舍区环游</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="157"/>

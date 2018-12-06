@@ -1,12 +1,11 @@
 #include "Map.h"
 #include <algorithm>
 #include <cmath>
-#include <assert.h>
-#include<fstream>
-#include<sstream>
 #include <utility>
-//#define che
-#define debug(...) fprintf(stderr, __VA_ARGS__)
+#include <assert.h>
+#include <fstream>
+#include <sstream>
+
 using std::map;
 using std::ios;
 using std::ifstream;
@@ -34,7 +33,6 @@ namespace _Fc_Temp_Array_{
 } using namespace _Fc_Temp_Array_;
 
 Map::Map() {//Build the Map from filename;
-
 	ifstream inFile(filename, ios::in);
 	string information;
 	getline(inFile, information);
@@ -45,7 +43,7 @@ Map::Map() {//Build the Map from filename;
 		getline(ss, temp, ',');
 		const char *cstr = temp.c_str();
 		int first, second;
-		sscanf(cstr, "%d %d", &first, &second);
+		sscanf_s(cstr, "%d %d", &first, &second);
 		Coordinate point(first, second);
 		node.coordinate = point;
 
@@ -85,7 +83,7 @@ Map::Map() {//Build the Map from filename;
 		while (getline(ss, temp, ',')) {
 			const char *_cstr = temp.c_str();
 			int a, b, c;
-			sscanf(_cstr, "%d %d %d", &a, &b, &c);
+			sscanf_s(_cstr, "%d %d %d", &a, &b, &c);
 			Coordinate p(a, b);
 			tuple <Coordinate, int> pt(p, c);
 			node.neighbors.insert(pt);
@@ -93,12 +91,6 @@ Map::Map() {//Build the Map from filename;
 
 		adj_Matrix[point] = node;
 	}
-    #ifdef che
-    vector<Coordinate> kk;
-    kk.push_back(make_pair(1409,672)); kk.push_back(make_pair(1404,1743));
-    vector<Coordinate> res = shortest_Navigation_Car(kk);
-    for (auto v:res) printf("(%d, %d)\n",v.first, v.second);
-    #endif
 }
 std::vector<Node> Map::getPlace()const{
 	std::vector<Node> tot;
@@ -140,7 +132,7 @@ Coordinate Map::MatchSite(Coordinate position){
 	Coordinate result=std::make_pair(-1,-1);
 	for ( auto item : adj_Matrix){
 		Coordinate tar=item.first;
-		if(item.second.type==Place &&  distance(tar, position) < RADIUS+1e-9)
+		if( distance(tar, position) < RADIUS+1e-9)
 			result = tar;
 	}
 	return result;
@@ -187,20 +179,15 @@ std::vector<Coordinate> Map::shortest_particular(
     const vector<Coordinate> &KeySite ,int op) {
 	int n=Label_Common();int m=Label_Key(KeySite);
 	BuildGraph(n, op);
-	#ifdef che
-//	debug("the minimal cost = %lf m=%d from_no=%d, to_no=%d\n", f[(1<<m)-1][to_no],m,from_no, to_no);
-	debug("f[0x1][0] = %lf, f[0x3][1]= %lf, dis=%lf ? %lf ? \n", f[1][0], f[3][1], Short_dis[Located_Key[0] ][ Located_Key[1] ],
-                        Short_dis[Located_Key[1] ][ Located_Key[0] ]);
-	#endif
     #ifdef che
-	debug("Places: ");
+/*	debug("Places: ");
 	for (int i=0; i<m; ++i){
         int j= Located_Key[i];
         debug("(%d,%d)\t",Located_Common[j].first, Located_Common[j].second);
     }
 	debug("\nn=%d\n",n);
 
-/*	for (int i=0; i<n; ++i)
+	for (int i=0; i<n; ++i)
         for (int j=i+1; j<n; ++j)//if ( Edge_dis[i][j] < INF)
         {
             debug("(%d, %d)---->(%d, %d) , dis= %lf\n", Located_Common[i].first,Located_Common[i].second,
@@ -220,13 +207,14 @@ std::vector<Coordinate> Map::shortest_particular(
 			for (int j=0; j<m; ++j)	if ( !(S&1<<j))
 				f[S|1<<j][j] = std::min(f[S|1<<j][j] , f[S][i] + Short_dis[Located_Key[i] ][ Located_Key[j] ]);
 	std::vector<int> Sequence_no; Sequence_no.push_back(Located_Key[to_no]);
-
+	#ifdef che
+	debug("the minimal cost = %lf\n", f[(1<<m)-1][to_no]);
+	#endif
 	for (int S=(1<<m)-1, i=to_no,j; S > (1<<from_no);){
 		for (j=0; j<m; ++j)
 			if ( j!=i  && (S&1<<j)){
                 double distij= Short_dis[Located_Key[i]][ Located_Key[j]];
                 #ifdef che
-                debug("distij=[%d][%d]\t", Located_Key[i], Located_Key[j]);
                 debug("j=%d, %lf+%lf==%lf = %d \n",j,f[S^1<<i][j],distij,f[S][i],dcmp(f[S^1<<i][j] + distij-f[S][i] ));
                 #endif
                 if (dcmp(f[S^1<<i][j] + distij -f[S][i] )==0 ) break;
@@ -242,61 +230,40 @@ std::vector<Coordinate> Map::shortest_particular(
 		S^= 1<<i;i=j;
 	}
 	vector<Coordinate> Sequence;
-	for (auto i : Sequence_no)
-        Sequence.push_back(Located_Common[i]);
+	for (auto i : Sequence_no) Sequence.push_back(Located_Common[i]);
 	std::reverse(Sequence.begin(), Sequence.end());
-
 	return Sequence;
 }
 std::vector<Coordinate> Map::shortest_Navigation_Car(
 	const vector<Coordinate> &KeySite) {
 	int n= Label_Common();
 	BuildGraph(n, -1);
-    int tunnal_start = -1, tunnal_finish = -1,to = Index_Common[KeySite.back()],from=Index_Common[KeySite.front()];
+    int tunnal = -1, to = Index_Common[KeySite.back()];
+	BuildGraph(n,-1);
 	for (int i=0; i<n; ++i)if (Car_Access[i]){
-        if ( tunnal_finish==-1 ||  Short_dis[i][to] < Short_dis[tunnal_finish][to]) tunnal_finish = i;
-        if ( tunnal_start==-1 || Short_dis[i][from] < Short_dis[tunnal_start][from] ) tunnal_start=i;
+        if ( tunnal==-1 ||  Short_dis[i][to] < Short_dis[tunnal][to]) tunnal = i;
         #ifdef che
         debug("(%d,%d)is accessible, dis=%lf\n",Located_Common[i].first,Located_Common[i].second,Short_dis[i][to]);
 //        debug("\ttunnal = (%d, %d) \n", Located_Common[tunnal].first, Located_Common[tunnal].second);
         #endif
     }
     #ifdef che
-    debug("tunnal=(%d,%d)\t(%d,%d)\n", Located_Common[tunnal_start].first,Located_Common[tunnal_start].second,
-            Located_Common[tunnal_finish].first,Located_Common[tunnal_finish].second);
+    debug("tunnal=(%d,%d)\n", Located_Common[tunnal],Located_Common[tunnal]);
     #endif
-    vector<Coordinate> route_start,route_navigator, route_finish, route,tmp;
-
-    route_start.push_back(KeySite.front());route_start.push_back(Located_Common[tunnal_start] );
-    route_navigator.push_back(Located_Common[tunnal_start]);
-    route_navigator.insert(route_navigator.begin()+1, KeySite.begin()+1, KeySite.end()-1);
-    route_navigator.push_back(Located_Common[tunnal_finish]);
-    route_finish.push_back( Located_Common[tunnal_finish]); route_finish.push_back(KeySite.back());
-    #ifdef che
-    debug("route_navigator : ");for (auto v:route_navigator) debug("(%d,%d)\t",v.first, v.second);
-    debug("\n");
-    #endif
-    if ( KeySite.front()!=Located_Common[tunnal_start]){
-        tmp = shortest_particular(route_start,-1);
-        route.insert(route.end(),tmp.begin(),tmp.end());
+    vector<Coordinate> route1=KeySite,route2;
+    route1.pop_back(); route1.push_back(Located_Common[tunnal] );
+    route2.push_back( Located_Common[tunnal]); route2.push_back(KeySite.back());
+    vector<Coordinate> path1=shortest_particular(route1,1),path2;
+    if ( route2.front() != route2.back()){
+        path2=shortest_particular(route2,-1);
+        path1.pop_back();path1.insert(path1.end(),path2.begin(),path2.end());
     }
-    if ( route_navigator.size() >1){
-        tmp = shortest_particular(route_navigator,1);
-        if ( route.size()) route.pop_back();
-        route.insert(route.end(), tmp.begin(), tmp.end());
-    }
-    if ( Located_Common[tunnal_finish]!=KeySite.back()){
-        tmp = shortest_particular(route_finish,-1);
-        if ( route.size()) route.pop_back();
-        route.insert(route.end(), tmp.begin(), tmp.end());
-    }
-    return route;
+    return path1;
 }
 
 std::vector<Coordinate> Map::shortest_Navigation_Walk(
 	const vector<Coordinate> &KeySite) {
-        vector<Coordinate> res=shortest_particular(KeySite,-1);
-		return res;
+		return shortest_particular(KeySite,-1);
 	}
 
 void Map::Walk_Along_Shortest(int n,int from, int to, vector<int> &Sequence){
@@ -304,7 +271,9 @@ void Map::Walk_Along_Shortest(int n,int from, int to, vector<int> &Sequence){
 		for (next=0; next<n; next++)
 			if ( next!=cur && dcmp(Short_dis[cur][to] -Short_dis[next][to]-Edge_dis[cur][next])==0 )
 				break;
-
+        #ifdef che
+ //       debug("cur=%d, next= %d, to=%d\n", cur, next, to);
+        #endif
 		Sequence.push_back(next);
 	}
 }
@@ -388,4 +357,3 @@ std::vector<Coordinate> Map::Recommend_3() // pedestrian overpass + underpass
 	return path1;
 
 }
-//#endif // !MAP_H

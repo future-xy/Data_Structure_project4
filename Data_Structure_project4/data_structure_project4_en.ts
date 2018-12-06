@@ -6,7 +6,7 @@
     <message>
         <location filename="Data_Structure_project4.ui" line="14"/>
         <source>Data_Structure_project4</source>
-        <translation></translation>
+        <translation>SYSU-MapNavigation</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="41"/>
@@ -26,17 +26,17 @@
     <message>
         <location filename="Data_Structure_project4.ui" line="105"/>
         <source>开始规划</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="118"/>
         <source>驾车</source>
-        <translation type="unfinished"></translation>
+        <translation>Driving</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="131"/>
         <source>步行</source>
-        <translation type="unfinished"></translation>
+        <translation>Walking</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="144"/>
@@ -51,17 +51,17 @@
     <message>
         <location filename="Data_Structure_project4.ui" line="196"/>
         <source>推荐路线3</source>
-        <translation type="unfinished"></translation>
+        <translation>Recommended3</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="209"/>
         <source>推荐路线1</source>
-        <translation type="unfinished"></translation>
+        <translation>Recommended1</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="222"/>
         <source>推荐路线2</source>
-        <translation type="unfinished"></translation>
+        <translation>Recommended2</translation>
     </message>
     <message>
         <location filename="Data_Structure_project4.ui" line="157"/>

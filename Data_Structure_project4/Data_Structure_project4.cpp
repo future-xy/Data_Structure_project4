@@ -30,7 +30,7 @@ Data_Structure_project4::Data_Structure_project4(QWidget *parent)
 		scene = new QGraphicsScene;
 		scene->addPixmap(QPixmap::fromImage(*image));
 		ui.Background->setScene(scene);
-		ui.Background->resize(1280, 720);
+		ui.Background->resize(1920, 1080);
 		ui.Background->show();
 	}
 	vector<Node> the_place = _map->getPlace();
@@ -39,11 +39,12 @@ Data_Structure_project4::Data_Structure_project4(QWidget *parent)
 		QGraphicsEllipseItem *temp_item = new QGraphicsEllipseItem(item.coordinate.first, \
 			item.coordinate.second, 10, 10);
 		temp_item->setBrush(QColor(255, 0, 0));
+		temp_item->setPen(QColor(255, 0, 0));
 		scene->addItem(temp_item);
 		places.push_back(temp_item);
 
 		QGraphicsTextItem *temp_name = new QGraphicsTextItem(QString::fromStdString(item.name));
-		temp_name->setPos(item.coordinate.first, item.coordinate.second);
+		temp_name->setPos(item.coordinate.first + 10, item.coordinate.second - 10);
 		place_names.push_back(temp_name);
 		scene->addItem(temp_name);
 	}
@@ -56,8 +57,8 @@ Data_Structure_project4::Data_Structure_project4(QWidget *parent)
 	vector<Coordinate> temp_path;
 	temp_path = _map->Recommend_1();
 	QPen temp_pen;
-	temp_pen.setWidth(3);
-	temp_pen.setColor(QColor(0, 255, 0));
+	temp_pen.setWidth(5);
+	temp_pen.setColor(QColor(33, 139, 61));
 	for (auto item = temp_path.begin(); (item + 1) != temp_path.end(); ++ item)
 	{
 		QGraphicsLineItem *temp_line = new QGraphicsLineItem(item->first, item->second, (item + 1)->first, (item + 1)->second);
@@ -159,8 +160,8 @@ void Data_Structure_project4::on_Driving_Navigation_clicked()
 	}
 	mypath.clear();
 	QPen temp_pen;
-	temp_pen.setWidth(3);
-	temp_pen.setColor(QColor(0, 0, 255));
+	temp_pen.setWidth(5);
+	temp_pen.setColor(QColor(21, 85, 213));
 	for (auto item = path_to_show.begin(); item + 1 != path_to_show.end(); ++item)
 	{
 
@@ -191,8 +192,8 @@ void Data_Structure_project4::on_Walking_Navigation_clicked()
 	}
 	mypath.clear();
 	QPen temp_pen;
-	temp_pen.setWidth(3);
-	temp_pen.setColor(QColor(0, 255, 0));
+	temp_pen.setWidth(5);
+	temp_pen.setColor(QColor(33, 139, 61));
 	for (auto item = path_to_show.begin(); item + 1 != path_to_show.end(); ++item)
 	{
 
@@ -282,7 +283,7 @@ void Data_Structure_project4::on_Parking_lot_clicked()
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_parking_lot);
 		QGraphicsTextItem *temp_text = new QGraphicsTextItem(QString::fromStdString(item.name));
 		temp_item->setPos(item.coordinate.first, item.coordinate.second);
-		temp_text->setPos(item.coordinate.first, item.coordinate.second);
+		temp_text->setPos(item.coordinate.first + 10, item.coordinate.second - 15);
 		scene->addItem(temp_item);
 		scene->addItem(temp_text);
 		points.push_back(temp_item);
@@ -306,7 +307,7 @@ void Data_Structure_project4::on_Restaurant_clicked()
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_restaurant);
 		QGraphicsTextItem *temp_text = new QGraphicsTextItem(QString::fromStdString(item.name));
 		temp_item->setPos(item.coordinate.first, item.coordinate.second);
-		temp_text->setPos(item.coordinate.first, item.coordinate.second);
+		temp_text->setPos(item.coordinate.first + 10, item.coordinate.second - 15);
 		scene->addItem(temp_item);
 		scene->addItem(temp_text);
 		points.push_back(temp_item);
@@ -330,7 +331,7 @@ void Data_Structure_project4::on_Smarket_clicked()
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_smarket);
 		QGraphicsTextItem *temp_text = new QGraphicsTextItem(QString::fromStdString(item.name));
 		temp_item->setPos(item.coordinate.first, item.coordinate.second);
-		temp_text->setPos(item.coordinate.first, item.coordinate.second);
+		temp_text->setPos(item.coordinate.first + 10, item.coordinate.second - 15);
 		scene->addItem(temp_item);
 		scene->addItem(temp_text);
 		points.push_back(temp_item);
@@ -362,7 +363,7 @@ void Data_Structure_project4::on_Test_Function_clicked()
 {
 	ui.textBrowser->clear();
 	ui.textBrowser->setVisible(false);
-
+	system("python main_packaged.py");
 }
 
 void Data_Structure_project4::on_Translate_clicked()
