@@ -51,6 +51,10 @@ public:
 
 	std::string Info(Coordinate) ;
 
+	std::vector<Coordinate> Recommend_1();
+	std::vector<Coordinate> Recommend_2();
+	std::vector<Coordinate> Recommend_3();
+
 	Coordinate MatchSite(Coordinate) ;
     std::vector<Coordinate> shortest_Navigation_Car(
         const std::vector<Coordinate> &KeySite);

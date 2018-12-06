@@ -36,10 +36,16 @@ Data_Structure_project4::Data_Structure_project4(QWidget *parent)
 	vector<Node> the_place = _map->getPlace();
 	for (auto item : the_place)
 	{
-		QGraphicsEllipseItem *temp_item=new QGraphicsEllipseItem(item.coordinate.first, item.coordinate.second, 10, 10);
-		temp_item->setBrush(QColor(200, 0, 0));
+		QGraphicsEllipseItem *temp_item = new QGraphicsEllipseItem(item.coordinate.first, \
+			item.coordinate.second, 10, 10);
+		temp_item->setBrush(QColor(255, 0, 0));
 		scene->addItem(temp_item);
 		places.push_back(temp_item);
+
+		QGraphicsTextItem *temp_name = new QGraphicsTextItem(QString::fromStdString(item.name));
+		temp_name->setPos(item.coordinate.first, item.coordinate.second);
+		place_names.push_back(temp_name);
+		scene->addItem(temp_name);
 	}
 	ui.Background->setMouseTracking(true);
 	ui.textBrowser->setVisible(false);
@@ -47,6 +53,32 @@ Data_Structure_project4::Data_Structure_project4(QWidget *parent)
 	the_restaurant.load("restaurant.png");
 	the_smarket.load("smarket.png");
 	the_WC.load("wc.png");
+	vector<Coordinate> temp_path;
+	temp_path = _map->Recommend_1();
+	QPen temp_pen;
+	temp_pen.setWidth(3);
+	temp_pen.setColor(QColor(0, 255, 0));
+	for (auto item = temp_path.begin(); (item + 1) != temp_path.end(); ++ item)
+	{
+		QGraphicsLineItem *temp_line = new QGraphicsLineItem(item->first, item->second, (item + 1)->first, (item + 1)->second);
+		temp_line->setPen(temp_pen);
+		path1.push_back(temp_line);
+	}
+	temp_path = _map->Recommend_2();
+	for (auto item = temp_path.begin(); (item + 1) != temp_path.end(); ++item)
+	{
+		QGraphicsLineItem *temp_line = new QGraphicsLineItem(item->first, item->second, (item + 1)->first, (item + 1)->second);
+		temp_line->setPen(temp_pen);;
+		path2.push_back(temp_line);
+	}
+	temp_path = _map->Recommend_3();
+	for (auto item = temp_path.begin(); (item + 1) != temp_path.end(); ++item)
+	{
+		QGraphicsLineItem *temp_line = new QGraphicsLineItem(item->first, item->second, (item + 1)->first, (item + 1)->second);
+		temp_line->setPen(temp_pen);
+		path3.push_back(temp_line);
+	}
+
 	QObject::connect(ui.Background, SIGNAL(mouseMovePoint(QPoint)),
 		this, SLOT(on_mouseMovePoint(QPoint)));
 
@@ -86,6 +118,9 @@ void Data_Structure_project4::on_mouseClicked(QPoint point)
 	QPointF pointScene = ui.Background->mapToScene(point);
 	Coordinate cor = _map->MatchSite(make_pair(pointScene.x(), pointScene.y()));
 	QPointF cur_cor(cor.first, cor.second);
+	ui.textBrowser->setVisible(true);
+	ui.textBrowser->setText(QString::number(cur_cor.x()) + " " + QString::number(cur_cor.y()));
+
 	if (cor.first != -1 && cor.second != -1)
 	{
 		if (theStatus == Navigation)
@@ -147,7 +182,7 @@ void Data_Structure_project4::on_Walking_Navigation_clicked()
 	}
 	if (temp_path.size() < 2)
 		return;
-	
+
 	path_to_show.clear();
 	path_to_show = _map->shortest_Navigation_Walk(temp_path);
 	for (auto item : mypath)
@@ -177,11 +212,28 @@ void Data_Structure_project4::on_Quit_clicked()
 		delete item;
 	}
 	mypath.clear();
-;
+	;
 	for (auto item : points)
 	{
 		delete item;
 	}
+	for (auto item : path1)
+	{
+		scene->removeItem(item);
+	}
+	for (auto item : path2)
+	{
+		scene->removeItem(item);
+	}
+	for (auto item : path3)
+	{
+		scene->removeItem(item);
+	}
+	for (auto item : point_names)
+	{
+		delete item;
+	}
+	point_names.clear();
 	points.clear();
 	path_to_save.clear();
 	path_to_show.clear();
@@ -192,37 +244,49 @@ void Data_Structure_project4::on_Quit_clicked()
 
 void Data_Structure_project4::on_recommended_clicked()
 {
-
+	for (auto item : path1)
+	{
+		scene->addItem(item);
+	}
 }
 
 void Data_Structure_project4::on_recommended2_clicked()
 {
-
+	for (auto item : path2)
+	{
+		scene->addItem(item);
+	}
 }
 
 void Data_Structure_project4::on_recommended3_clicked()
 {
-
+	for (auto item : path3)
+	{
+		scene->addItem(item);
+	}
 }
 
 void Data_Structure_project4::on_Parking_lot_clicked()
 {
 	ui.textBrowser->clear();
 	ui.textBrowser->setVisible(false);
-	for (auto item : points)
+	/*for (auto item : points)
 	{
 		delete item;
 	}
-	points.clear();
+	points.clear();*/
 	vector<Node> the_point = _map->getParking_lot();
 
 	for (auto item : the_point)
 	{
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_parking_lot);
-		temp_item->setX(item.coordinate.first);
-		temp_item->setY(item.coordinate.second);
+		QGraphicsTextItem *temp_text = new QGraphicsTextItem(QString::fromStdString(item.name));
+		temp_item->setPos(item.coordinate.first, item.coordinate.second);
+		temp_text->setPos(item.coordinate.first, item.coordinate.second);
 		scene->addItem(temp_item);
+		scene->addItem(temp_text);
 		points.push_back(temp_item);
+		point_names.push_back(temp_text);
 	}
 }
 
@@ -230,20 +294,23 @@ void Data_Structure_project4::on_Restaurant_clicked()
 {
 	ui.textBrowser->clear();
 	ui.textBrowser->setVisible(false);
-	for (auto item : points)
+/*	for (auto item : points)
 	{
 		delete item;
 	}
-	points.clear();
+	points.clear();*/
 	vector<Node> the_point = _map->getRestaurant();
 
 	for (auto item : the_point)
 	{
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_restaurant);
-		temp_item->setX(item.coordinate.first);
-		temp_item->setY(item.coordinate.second);
+		QGraphicsTextItem *temp_text = new QGraphicsTextItem(QString::fromStdString(item.name));
+		temp_item->setPos(item.coordinate.first, item.coordinate.second);
+		temp_text->setPos(item.coordinate.first, item.coordinate.second);
 		scene->addItem(temp_item);
+		scene->addItem(temp_text);
 		points.push_back(temp_item);
+		point_names.push_back(temp_text);
 	}
 }
 
@@ -251,20 +318,23 @@ void Data_Structure_project4::on_Smarket_clicked()
 {
 	ui.textBrowser->clear();
 	ui.textBrowser->setVisible(false);
-	for (auto item : points)
+	/*for (auto item : points)
 	{
 		delete item;
 	}
-	points.clear();
+	points.clear();*/
 	vector<Node> the_point = _map->getSmarket();
 
 	for (auto item : the_point)
 	{
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_smarket);
-		temp_item->setX(item.coordinate.first);
-		temp_item->setY(item.coordinate.second);
+		QGraphicsTextItem *temp_text = new QGraphicsTextItem(QString::fromStdString(item.name));
+		temp_item->setPos(item.coordinate.first, item.coordinate.second);
+		temp_text->setPos(item.coordinate.first, item.coordinate.second);
 		scene->addItem(temp_item);
+		scene->addItem(temp_text);
 		points.push_back(temp_item);
+		point_names.push_back(temp_text);
 	}
 }
 
@@ -272,18 +342,17 @@ void Data_Structure_project4::on_WC_clicked()
 {
 	ui.textBrowser->clear();
 	ui.textBrowser->setVisible(false);
-	for (auto item : points)
+/*	for (auto item : points)
 	{
 		delete item;
 	}
-	points.clear();
+	points.clear();*/
 	vector<Node> the_point = _map->getWC();
 
 	for (auto item : the_point)
 	{
 		QGraphicsPixmapItem *temp_item = new QGraphicsPixmapItem(the_WC);
-		temp_item->setX(item.coordinate.first);
-		temp_item->setY(item.coordinate.second);
+		temp_item->setPos(item.coordinate.first, item.coordinate.second);
 		scene->addItem(temp_item);
 		points.push_back(temp_item);
 	}
@@ -293,6 +362,7 @@ void Data_Structure_project4::on_Test_Function_clicked()
 {
 	ui.textBrowser->clear();
 	ui.textBrowser->setVisible(false);
+
 }
 
 void Data_Structure_project4::on_Translate_clicked()

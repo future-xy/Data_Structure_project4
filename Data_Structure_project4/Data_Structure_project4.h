@@ -31,8 +31,13 @@ private:
 	std::vector<QGraphicsLineItem *> mypath;
 	QPixmap the_parking_lot, the_WC, the_restaurant, the_smarket;
 	std::vector<QGraphicsPixmapItem* > points;
+	std::vector<QGraphicsTextItem*> point_names;
 	std::vector<QGraphicsEllipseItem*> places;
+	std::vector<QGraphicsTextItem* > place_names;
 	std::vector<Coordinate> path_to_show;
+	std::vector<QGraphicsLineItem*> path1;
+	std::vector<QGraphicsLineItem*> path2;
+	std::vector<QGraphicsLineItem*> path3;
 	std::vector<QPointF> path_to_save;
 	Status theStatus;
 

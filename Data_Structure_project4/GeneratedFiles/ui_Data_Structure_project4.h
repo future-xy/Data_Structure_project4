@@ -43,7 +43,7 @@ public:
     QPushButton *WC;
     QPushButton *recommended3;
     QPushButton *recommended;
-    QPushButton *recommend2;
+    QPushButton *recommended2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -71,10 +71,10 @@ public:
         Quit->setGeometry(QRect(20, 490, 119, 34));
         textBrowser = new QTextBrowser(centralWidget);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        textBrowser->setGeometry(QRect(740, 30, 256, 192));
+        textBrowser->setGeometry(QRect(740, 30, 270, 360));
         QFont font;
-        font.setFamily(QStringLiteral("Microsoft YaHei"));
-        font.setPointSize(15);
+        font.setFamily(QStringLiteral("Microsoft YaHei UI"));
+        font.setPointSize(13);
         textBrowser->setFont(font);
         textBrowser->setStyleSheet(QStringLiteral("background-color: rgba(237, 245, 255, 150);"));
         textBrowser->setFrameShadow(QFrame::Raised);
@@ -106,9 +106,9 @@ public:
         recommended = new QPushButton(centralWidget);
         recommended->setObjectName(QStringLiteral("recommended"));
         recommended->setGeometry(QRect(21, 111, 112, 29));
-        recommend2 = new QPushButton(centralWidget);
-        recommend2->setObjectName(QStringLiteral("recommend2"));
-        recommend2->setGeometry(QRect(21, 147, 112, 30));
+        recommended2 = new QPushButton(centralWidget);
+        recommended2->setObjectName(QStringLiteral("recommended2"));
+        recommended2->setGeometry(QRect(21, 147, 112, 30));
         Data_Structure_project4Class->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Data_Structure_project4Class);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -141,7 +141,7 @@ public:
         WC->setText(QApplication::translate("Data_Structure_project4Class", "\345\215\253\347\224\237\351\227\264", Q_NULLPTR));
         recommended3->setText(QApplication::translate("Data_Structure_project4Class", "\346\216\250\350\215\220\350\267\257\347\272\2773", Q_NULLPTR));
         recommended->setText(QApplication::translate("Data_Structure_project4Class", "\346\216\250\350\215\220\350\267\257\347\272\2771", Q_NULLPTR));
-        recommend2->setText(QApplication::translate("Data_Structure_project4Class", "\346\216\250\350\215\220\350\267\257\347\272\2772", Q_NULLPTR));
+        recommended2->setText(QApplication::translate("Data_Structure_project4Class", "\346\216\250\350\215\220\350\267\257\347\272\2772", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -1,9 +1,10 @@
 #include "Map.h"
 #include <algorithm>
 #include <cmath>
+#include <utility>
 #include <assert.h>
-#include<fstream>
-#include<sstream>
+#include <fstream>
+#include <sstream>
 
 using std::map;
 using std::ios;
@@ -12,6 +13,7 @@ using std::string;
 using std::stringstream;
 using std::tuple;
 using std::set;
+using std::make_pair;
 using std::pair;
 using std::vector;
 
@@ -280,4 +282,78 @@ double Map::distance(Coordinate a, Coordinate b){
 	double dx= a.first-b.first, dy= a.second-b.second;
 	return sqrt(dx*dx + dy*dy);
 }
-//#endif // !MAP_H
+
+std::vector<Coordinate> Map::Recommend_1()  //medial axis
+{
+	vector<Coordinate> path1;
+
+	path1.push_back(make_pair(1430, 697));
+	path1.push_back(make_pair(1434, 834));
+	path1.push_back(make_pair(1447, 941));
+	path1.push_back(make_pair(1486, 941));
+	path1.push_back(make_pair(1485, 1050));
+	path1.push_back(make_pair(1486, 1255));
+	path1.push_back(make_pair(1501, 1465));
+	path1.push_back(make_pair(1451, 1465));
+	path1.push_back(make_pair(1455, 1512));
+	path1.push_back(make_pair(1467, 1579));
+	path1.push_back(make_pair(1466, 1735));
+	path1.push_back(make_pair(1404, 1743));
+	path1.push_back(make_pair(1339, 1735));
+	path1.push_back(make_pair(1338, 1689));
+	path1.push_back(make_pair(1349, 1512));
+	path1.push_back(make_pair(1355, 1466));
+	path1.push_back(make_pair(1300, 1465));
+	path1.push_back(make_pair(1323, 1257));
+	path1.push_back(make_pair(1323, 1049));
+	path1.push_back(make_pair(1327, 941));
+	path1.push_back(make_pair(1369, 941));
+	path1.push_back(make_pair(1372, 834));
+	path1.push_back(make_pair(1379, 697));
+
+	path1.push_back(make_pair(1430, 697));
+
+	return path1;
+
+}
+
+std::vector<Coordinate> Map::Recommend_2()// Dormitory area
+{
+
+	vector<Coordinate> path1;
+
+	path1.push_back(make_pair(1329, 2438));
+	path1.push_back(make_pair(1138, 2529));
+	path1.push_back(make_pair(1298, 2698));
+	path1.push_back(make_pair(1193, 2811));
+	path1.push_back(make_pair(1298, 2698));
+	path1.push_back(make_pair(1488, 2711));
+
+	return path1;
+
+}
+
+std::vector<Coordinate> Map::Recommend_3() // pedestrian overpass + underpass
+{
+	vector<Coordinate> path1;
+
+	path1.push_back(make_pair(829, 2177));
+	path1.push_back(make_pair(832, 1749));
+	path1.push_back(make_pair(925, 1674));
+	path1.push_back(make_pair(834, 1561));
+	path1.push_back(make_pair(855, 1506));
+	path1.push_back(make_pair(944, 1477));
+	path1.push_back(make_pair(1029, 1591));
+	path1.push_back(make_pair(1153, 1531));
+	path1.push_back(make_pair(1355, 1466));
+	path1.push_back(make_pair(1349, 1512));
+	path1.push_back(make_pair(1388, 1689));
+	path1.push_back(make_pair(1339, 1735));
+	path1.push_back(make_pair(1324, 1821));
+	path1.push_back(make_pair(1047, 2033));
+	path1.push_back(make_pair(829, 2177));
+
+
+	return path1;
+
+}
